@@ -1,0 +1,2 @@
+allow ueventd usb_device:chr_file relabelfrom;
+allow ueventd usb_device:chr_file relabelto;

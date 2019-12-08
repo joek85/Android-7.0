@@ -1,0 +1,12 @@
+#============= wpa ==============
+allow wpa self:netlink_kobject_uevent_socket create;
+allow wpa sysfs:file write;
+# wpa_supplicant
+allow wpa devpts:chr_file rw_file_perms;
+allow wpa init:unix_dgram_socket rw_socket_perms;
+#============= wpa ==============
+allow wpa property_socket:sock_file write;
+#============= wpa ==============
+allow wpa init:unix_stream_socket connectto;
+allow wpa system_prop:property_service set;
+allow wpa self:netlink_kobject_uevent_socket { bind setopt read write };

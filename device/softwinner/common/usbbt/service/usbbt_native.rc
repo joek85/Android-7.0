@@ -1,0 +1,9 @@
+
+service usbbt_native /system/bin/usbbt_native
+    class core
+    user root
+    group root
+    oneshot
+
+on property:sys.usbbt.inserted=1
+    start usbbt_native

@@ -1,0 +1,16 @@
+on init
+    insmod /nand.ko
+    insmod /sunxi-ir-rx.ko
+    insmod /sunxi-keyboard.ko
+    insmod /disp.ko
+    insmod /lcd.ko
+
+    mkdir /extsd
+    mkdir /bootloader
+    exec /sbin/busybox sh /sbin/init_parttion.sh
+
+service console /sbin/sh
+    console
+    disabled
+    user shell
+    group log

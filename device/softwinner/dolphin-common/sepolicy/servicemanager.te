@@ -1,0 +1,20 @@
+#============= servicemanager ==============
+allow servicemanager zygote:dir search;
+allow servicemanager zygote:file { read open };
+allow servicemanager zygote:process getattr;
+#systemmix
+allow servicemanager systemmix:process { getattr };
+allow servicemanager systemmix:dir search;
+allow servicemanager systemmix:file r_file_perms;
+allow servicemanager ashmservice:dir search;
+allow servicemanager ashmservice:file { open read };
+allow servicemanager ashmservice:process getattr;
+allow servicemanager jackd:dir search;
+allow servicemanager jackd:file { open read };
+allow servicemanager jackd:process getattr;
+allow servicemanager alsa_player:dir search;
+allow servicemanager alsa_player:file { open read };
+allow servicemanager alsa_player:process getattr;
+allow servicemanager helloworldserver:dir search;
+allow servicemanager helloworldserver:file { open read };
+allow servicemanager helloworldserver:process getattr;

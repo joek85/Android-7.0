@@ -1,0 +1,9 @@
+#add external storage: ntfs and exfat
+genfscon fuseblk / u:object_r:fuseblk:s0
+genfscon iso9660 / u:object_r:bluray:s0
+genfscon udf / u:object_r:bluray:s0
+genfscon proc /bluetooth/sleep/lpm     u:object_r:proc_bluetooth_writable:s0
+genfscon proc /bluetooth/sleep/btwrite u:object_r:proc_bluetooth_writable:s0
+genfscon proc /bluetooth/sleep/suspend u:object_r:proc_bluetooth_writable:s0
+genfscon cifs / u:object_r:cifs:s0
+genfscon nfs / u:object_r:nfs:s0

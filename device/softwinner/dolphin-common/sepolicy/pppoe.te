@@ -1,0 +1,51 @@
+#pppoe_service
+type pppoe_service,system_api_service,system_server_service,service_manager_type;
+
+#start_pppoe service
+type start_pppoe,domain;
+type start_pppoe_exec,exec_type,file_type;
+type pppoe_data_file, file_type, data_file_type;
+init_daemon_domain(start_pppoe);
+type_transition start_pppoe system_data_file:{dir file} pppoe_data_file;
+
+#stop_pppoe service
+type stop_pppoe,domain;
+type stop_pppoe_exec,exec_type,file_type;
+init_daemon_domain(stop_pppoe);
+type_transition stop_pppoe system_data_file:{dir file} pppoe_data_file;
+
+#allow options for start_pppoe
+allow start_pppoe shell_exec:file r_file_perms;
+allow start_pppoe toolbox_exec:file rx_file_perms;
+allow start_pppoe self:capability {dac_override net_admin net_raw setuid setgid sys_module};
+allow start_pppoe ppp_device:chr_file {read write open ioctl};
+allow start_pppoe self:packet_socket {create ioctl setopt bind write read };
+allow start_pppoe self:udp_socket {create ioctl};
+allow start_pppoe init:unix_stream_socket {connectto};
+allow start_pppoe self:socket {create ioctl connect};
+allow start_pppoe system_data_file:file {read open getattr};
+allow start_pppoe system_data_file:dir {write open getattr add_name remove_name};
+allow start_pppoe pppoe_data_file:dir  {create write read open getattr};
+allow start_pppoe pppoe_data_file:file {create write read open getattr unlink};
+allow start_pppoe system_prop:property_service {set};
+allow start_pppoe system_file:file {execute_no_trans};
+allow start_pppoe shell_exec:file {execute};
+allow start_pppoe property_socket:sock_file {write};
+allow start_pppoe self:socket {create ioctl connect};
+allow start_pppoe kernel:system {module_request};
+allow shell ctl_default_prop:property_service {set};
+allow start_pppoe start_pppoe_exec:file {execute_no_trans};
+allow start_pppoe sysfs:file {open read};
+#allow options for stop_pppoe
+allow stop_pppoe shell_exec:file {getattr read };
+allow stop_pppoe sysfs:file {getattr read open};
+allow stop_pppoe system_prop:property_service {set};
+allow stop_pppoe toolbox_exec:file {getattr execute read open execute_no_trans};
+allow stop_pppoe property_socket:sock_file {write};
+allow stop_pppoe init:unix_stream_socket {connectto};
+allow stop_pppoe system_data_file:file {read open getattr};
+allow stop_pppoe system_data_file:dir {write open getattr add_name};
+allow stop_pppoe pppoe_data_file:dir  {create write read open getattr};
+allow stop_pppoe pppoe_data_file:file {create write read open getattr};
+allow stop_pppoe self:capability {dac_override dac_read_search};
+allow stop_pppoe start_pppoe:process {signal sigkill};

@@ -1,0 +1,23 @@
+type systemmix, domain,mlstrustedsubject;
+type systemmix_exec,exec_type,file_type;
+init_daemon_domain(systemmix);
+allow systemmix servicemanager:binder { call transfer };
+allow systemmix systemmix:capability dac_override;
+allow systemmix fuse:dir { search };
+allow systemmix fuse:file { r_file_perms };
+allow systemmix vfat:file create_file_perms;
+allow systemmix vfat:dir w_dir_perms;
+allow systemmix softwinner_service:service_manager add;
+allow systemmix storage_file:dir r_dir_perms;
+#samba
+allow systemmix systemmix:capability sys_admin;
+allow systemmix app_data_file:dir {search mounton};
+allow systemmix cifs:filesystem {mount unmount};
+allow systemmix cifs:file create_file_perms;
+allow systemmix cifs:dir create_dir_perms;
+allow systemmix kernel:system {module_request};
+#nfs
+allow systemmix nfs:filesystem {mount unmount};
+allow systemmix nfs:file create_file_perms;
+allow systemmix nfs:dir create_dir_perms;
+allow systemmix {nfs app_data_file}:dir mounton;

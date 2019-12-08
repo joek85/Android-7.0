@@ -1,0 +1,9 @@
+type helloworldserver, domain;
+type helloworldserver_exec, exec_type, file_type;
+init_daemon_domain(helloworldserver);
+allow helloworldserver ashmservice:binder call;
+allow helloworldserver ashmservice:fd use;
+allow helloworldserver jackd:unix_stream_socket connectto;
+allow helloworldserver self:capability { ipc_lock sys_nice };
+allow helloworldserver servicemanager:binder { call transfer };
+

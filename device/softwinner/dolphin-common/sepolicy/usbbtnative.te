@@ -1,0 +1,16 @@
+type usbbt_native, domain;
+type usbbt_native_exec, exec_type, file_type;
+typeattribute usbbt_native mlstrustedsubject;
+init_daemon_domain(usbbt_native);
+
+allow usbbt_native self:capability {chown setgid setuid};
+allow usbbt_native usb_device:capability {chown setgid setuid};
+allow usbbt_native self:unix_stream_socket {connectto acceptfrom read write create bind};
+allow usbbt_native usb_device:chr_file {execmod open read write create setattr};
+allow usbbt_native usb_device:dir {search read open};
+allow usbbt_native system_app:unix_stream_socket {connectto bind write};
+allow usbbt_native sysfs:dir {search read open};
+allow usbbt_native sysfs:file {getattr read open};
+allow usbbt_native property_socket:sock_file {write};
+allow usbbt_native init:unix_stream_socket {connectto};
+allow usbbt_native system_prop:property_service {set};

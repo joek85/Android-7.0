@@ -1,0 +1,67 @@
+# label graphics device with a new type, we need
+# to allow write operation from appdomain
+
+# gpu device labeling
+/dev/mali              u:object_r:gpu_device:s0
+
+# disp device labeling
+/dev/disp               u:object_r:disp_device:s0
+/dev/transform          u:object_r:disp_device:s0
+
+/dev/cedar_dev    u:object_r:cedar_device:s0
+/dev/sunxi_soc_info   u:object_r:sunxi_soc_info_device:s0
+
+
+/system/bin/setup_fs      u:object_r:fsck_exec:s0
+/system/bin/multi_ir      u:object_r:multi_ir_exec:s0
+/system/bin/displayd      u:object_r:displayd_exec:s0
+/system/bin/usbbt_native  u:object_r:usbbt_native_exec:s0
+/system/bin/log_bg.sh     u:object_r:log_bg_exec:s0
+/system/bin/gpioservice     u:object_r:gpioservice_exec:s0
+/system/bin/pppoe         u:object_r:start_pppoe_exec:s0
+/system/bin/pppoe-disconnect   u:object_r:stop_pppoe_exec:s0
+/system/bin/pppoe-connect      u:object_r:start_pppoe_exec:s0
+/system/bin/qw            u:object_r:qw_exec:s0
+/system/bin/systemmixservice  u:object_r:systemmix_exec:s0
+/system/bin/att_policy      u:object_r:att_policy_exec:s0
+/system/bin/ashmservice          u:object_r:ashmservice_exec:s0
+/system/bin/jackd     	 	 u:object_r:jackd_exec:s0
+/system/bin/helloworldserver     u:object_r:helloworldserver_exec:s0
+/system/xbin/alsa_in     	 u:object_r:alsa_player_exec:s0
+
+/data/misc/pppoe(/.*)?    u:object_r:pppoe_data_file:s0
+
+/dev/block/mmcblk0p1        u:object_r:userdata_block_device:s0
+/dev/block/mmcblk0p2        u:object_r:userdata_block_device:s0
+/dev/block/mmcblk0p5        u:object_r:userdata_block_device:s0
+/dev/block/mmcblk0p6        u:object_r:userdata_block_device:s0
+/dev/block/mmcblk0p8        u:object_r:userdata_block_device:s0
+/dev/block/mmcblk0p10       u:object_r:userdata_block_device:s0
+/dev/block/mmcblk0p11       u:object_r:userdata_block_device:s0
+/dev/block/mmcblk0p13       u:object_r:userdata_block_device:s0
+/dev/block/mmcblk0p14       u:object_r:userdata_block_device:s0
+/dev/block/mmcblk0p15       u:object_r:userdata_block_device:s0
+/dev/block/mmcblk0p16       u:object_r:userdata_block_device:s0
+/dev/block/mmcblk0p17       u:object_r:userdata_block_device:s0
+
+/dev/block/nanda            u:object_r:userdata_block_device:s0
+/dev/block/nandb            u:object_r:userdata_block_device:s0
+/dev/block/nandc            u:object_r:userdata_block_device:s0
+/dev/block/nande            u:object_r:userdata_block_device:s0
+/dev/block/nandg            u:object_r:userdata_block_device:s0
+/dev/block/nandh            u:object_r:userdata_block_device:s0
+/dev/block/nandj            u:object_r:userdata_block_device:s0
+/dev/block/nandk            u:object_r:userdata_block_device:s0
+/dev/block/nandl            u:object_r:userdata_block_device:s0
+/dev/block/nandm            u:object_r:userdata_block_device:s0
+/dev/block/nandn            u:object_r:userdata_block_device:s0
+/dev/block/nando            u:object_r:userdata_block_device:s0
+
+/dev/block/zram0            u:object_r:swap_block_device:s0
+
+/dev/block/by-name/UDISK        u:object_r:userdata_block_device:s0
+/dev/sst_storage            u:object_r:sst_storage_device:s0
+/dev/deinterlace            u:object_r:deinterlace_device:s0
+/dev/googlevp9_dev          u:object_r:googlevp9_device:s0
+
+/dev/socket/displayd        u:object_r:displayd_socket_device:s0

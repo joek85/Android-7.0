@@ -1,0 +1,7 @@
+key 20   DPAD_DOWN          WAKE_DROPPED
+key 14   DPAD_UP            WAKE_DROPPED
+key 16   DPAD_LEFT          WAKE_DROPPED
+key 18   DPAD_RIGHT         WAKE_DROPPED
+key 1    POWER              WAKE
+key 17   STAR
+key 14   BACK

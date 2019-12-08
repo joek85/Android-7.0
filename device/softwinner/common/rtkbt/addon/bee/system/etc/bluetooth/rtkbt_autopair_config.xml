@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<root>
+	<Autopair_type total_num = "4">
+		<type>136</type>
+	</Autopair_type>
+	<Autopair_rssi>
+		<rssi>60</rssi>
+	</Autopair_rssi>
+	<Address_pair address_num = "1">
+		<address_1>5C:31:3E</address_1>
+	</Address_pair>
+	<Name_pair name_num = "1">
+		<name_1>LETV</name_1>
+	</Name_pair>
+	<Key_pair key_num = "2">
+		<key_1>1</key_1>
+		<key_2>2</key_2>
+		<key_3>3</key_3>
+		<key_4>4</key_4>
+	</Key_pair>
+	<ManufactSpeciData data_length = "4">
+		<specidata_value>5D:00:04:00</specidata_value>
+		<mask_value>FF:FF:FF:FF</mask_value>
+	</ManufactSpeciData>
+	<Autopair_vendor_event vendor_type = "8">
+	</Autopair_vendor_event>
+	<Autopair_service_timeout>
+		<timeout>600000</timeout>
+	</Autopair_service_timeout>
+</root>

@@ -1,0 +1,5 @@
+#============= fsck ==============
+allow fsck block_device:blk_file getattr;
+allow fsck proc_sysrq:file write;
+allow fsck self:capability sys_boot;
+allow fsck system_file:file execute_no_trans;

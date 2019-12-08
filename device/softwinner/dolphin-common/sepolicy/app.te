@@ -1,0 +1,11 @@
+#add permission for fs:fuseblk(ntfs,exfat) of external storage
+allow appdomain fuseblk:dir r_dir_perms;
+allow appdomain fuseblk:file rw_file_perms;
+allow appdomain systemmix:binder call;
+allow appdomain sysfs:file r_file_perms;
+#samba
+allow appdomain cifs:dir r_dir_perms;
+allow appdomain cifs:file r_file_perms;
+#nfs
+allow appdomain nfs:dir r_dir_perms;
+allow appdomain nfs:file r_file_perms;

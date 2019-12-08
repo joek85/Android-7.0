@@ -1,0 +1,4 @@
+#============= cameraserver ==============
+allow cameraserver cedar_device:chr_file rw_file_perms;
+allow cameraserver system_file:dir r_file_perms;
+

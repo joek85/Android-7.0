@@ -1,0 +1,9 @@
+#============= kernel ==============
+allow kernel device:chr_file { create getattr setattr unlink};
+allow kernel device:dir { write add_name remove_name rmdir};
+allow kernel self:capability mknod;
+allow kernel device:dir create;
+allow kernel device:blk_file { create setattr getattr unlink };
+allow kernel block_device:blk_file { open read write };
+#samba
+allow kernel kernel:capability {net_raw net_bind_service};

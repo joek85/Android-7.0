@@ -1,0 +1,7 @@
+allow system_app radio_data_file:dir getattr;
+allow system_app self:process ptrace;
+allow system_app unlabeled:filesystem getattr;
+allow system_app self:netlink_kobject_uevent_socket {create setopt bind read};
+allow system_app audio_prop:property_service set;
+allow system_app helloworldserver:binder call;
+

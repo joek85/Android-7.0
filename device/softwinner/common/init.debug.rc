@@ -1,0 +1,29 @@
+
+service log_bg /system/bin/sh /system/bin/log_bg.sh
+    class core
+    user root
+    seclabel u:r:log_bg:s0
+    group root system
+    oneshot
+
+service log_temp /sbin/busybox sh /system/xbin/log_temperature.sh
+    user root
+    group root
+    disabled
+    oneshot
+
+service memtest /sbin/busybox sh /system/xbin/start_memtester.sh
+    user root
+    group root
+    disabled
+    oneshot
+
+service qw /system/bin/qw --daemon
+    user root
+    group root
+    class core
+
+on property:sys.boot_completed=1
+#    start log_temp
+#    start memtest
+

@@ -1,0 +1,12 @@
+--- softwinner/rabbit-p1/init.sun50iw1p1.rc
++++ softwinner/rabbit-p1/init.sun50iw1p1.rc
+@@ -99,9 +99,6 @@
+ #bluesleep
+     #insmod /system/vendor/modules/bcm_btlpm.ko
+ 
+-#daudio1
+-    insmod /system/vendor/modules/sunxi-snddaudio1.ko
+-
+ # bluetooth
+     # UART device
+     chmod 0660 /dev/ttyS1

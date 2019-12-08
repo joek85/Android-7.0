@@ -1,0 +1,10 @@
+type ashmservice, domain;
+type ashmservice_exec, exec_type, file_type;
+init_daemon_domain(ashmservice);
+allow ashmservice jackd:binder transfer;
+allow ashmservice jackd:process signull;
+allow ashmservice servicemanager:binder { call transfer };
+allow ashmservice alsa_player:binder transfer;
+allow ashmservice helloworldserver:binder transfer;
+
+

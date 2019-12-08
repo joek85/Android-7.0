@@ -1,0 +1,97 @@
+================================================================
+Copyright (C) 2017 Albert Yu (yuxyun@allwinnertech.com)
+
+================================================================
+GPU Type list
+=============
+Mali GPU
+    Mali Utgard
+        Mali-400
+        Mali-450
+
+    Mali Midgard
+        Mali-T720
+        Mali-T760
+
+Imagination GPU
+    SGX544
+    RGX6230
+
+================================================================
+GPU Type on Allwinner platforms
+A10/A13/R8
+	Mali-400 MP1
+
+A20/T2/A23/A33/R16/H3/A64/H64/R18/V40/A20E/R40/T3
+	Mali-400 MP2
+
+A31/A31S
+	SGX-544 MP2
+
+A83T/H8/H8vr/V66/T8/R58
+	SGX-544 MP1
+
+A80/A80T
+	RGX-6230 MP2
+
+H5
+	Mali-450 MP4
+
+H6
+	Mali-T720 MP2
+
+A63/VR9
+	Mali-T760 MP2
+
+================================================================
+Macro definition
+================
+SUNXI_YUV_ALIGN
+	Define the aligned value of YUV format, e.g. if SUNXI_YUV_ALIGN is
+16, then the stride value will be aligned by 16 (if the width is 15, then
+the stride value will be 16).
+
+SUNXI_MEM_CONTIGUOUS
+	The flag to descript if the buffer is physical contiguous. This flag
+is stored in flags which is in private_handle_t. As for some Allwinner plat-
+forms, some hardware modules such as DE and VE do not have IOMMU, so physical
+contiguous buffers are essential. This flag is useful for HWC to determine
+which hardware module (DE or GPU) to composite the corresponding layer data.
+
+================================================================
+The description of some variables
+=================================
+private_handle_t
+	When new a Graphic Buffer, the Gralloc alloc funciton will be called
+to allocate a Graphic Buffer, and at the same time the buffer information
+will be stored in private_handle_t whose virtual address will be assigned to
+buffer_handle_t in Gralloc alloc. Actually, Android uses buffer_handle_t
+instead of private_handle_t to share buffer information between two processes.
+
+share_fd
+	Stores the shared fd of this buffer, and other software modules can use
+it to do import to get a useful ion handle.
+
+width
+	Stores the width of the Graphic Buffer.
+
+height
+	Stores the height of the Graphic Buffer.
+
+format
+	Stores the format of the Graphic Buffer, and all useful formats are
+defined in:
+	system/core/include/system/graphics.h
+
+usage
+	Stores the Gralloc usage value, and all useful usage flags are defined in:
+	hardware/libhardware/include/hardware/gralloc.h
+
+flags
+	Stores some flags such as SUNXI_MEM_CONTIGUOUS. Currently we just support
+SUNXI_MEM_CONTIGUOUS.
+
+aw_buf_id
+	Sometimes we wanna know the track of certain buffer, and with this variable,
+we can print its value in Gralloc, HWC, CedarX and everywhere we want, in this way
+we can get when the buffer is allocated, when the buffer is freed and so on.

@@ -1,0 +1,8 @@
+#============= bootanim ==============
+allow bootanim audioserver_service:service_manager find;
+allow bootanim audioserver:binder call;
+allow bootanim audioserver:binder transfer;
+allow bootanim mediaserver_service:service_manager find;
+allow bootanim mediaserver:binder call;
+allow bootanim mediaserver:binder transfer;
+allow bootanim system_data_file:file {open read};

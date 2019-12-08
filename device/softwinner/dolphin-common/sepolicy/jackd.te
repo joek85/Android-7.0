@@ -1,0 +1,12 @@
+type jackd, domain;
+type jackd_exec, exec_type, file_type;
+init_daemon_domain(jackd);
+allow jackd ashmservice:binder call;
+allow jackd ashmservice:fd use;
+allow jackd audio_device:chr_file { ioctl open read write };
+allow jackd self:capability { dac_override ipc_lock sys_nice };
+allow jackd servicemanager:binder call;
+allow jackd system_file:dir { open read };
+allow jackd alsa_player:unix_stream_socket connectto;
+allow jackd helloworldserver:unix_stream_socket connectto;
+

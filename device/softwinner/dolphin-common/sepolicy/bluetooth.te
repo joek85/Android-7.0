@@ -1,0 +1,10 @@
+#permissive bluetooth;
+
+allow bluetooth usb_device:dir {read open search};
+allow bluetooth usb_device:chr_file {read open write};
+allow bluetooth bluetooth:process {ptrace};
+
+allow bluetooth serial_device:chr_file {open read write ioctl};
+allow bluetooth sysfs:file {open read write};
+
+allow bluetooth storage_stub_file:dir {getattr};

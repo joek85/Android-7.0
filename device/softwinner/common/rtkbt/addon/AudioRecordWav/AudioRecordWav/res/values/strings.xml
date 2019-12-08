@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AudioRecordWav</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="button_default_text">REPLAY</string>
+    <string name="text_default_text">Press And Hold</string>
+
+</resources>

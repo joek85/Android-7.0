@@ -1,0 +1,22 @@
+import init.debug.rc
+
+on property:sys.bootstrap_service_started=1
+    start preinstall
+
+service bootclone /sbin/busybox sh /system/bin/bootclone.sh
+    user root
+    group root
+    oneshot
+    disabled
+
+service precopy /sbin/busybox sh /system/bin/precopy.sh
+    user root
+    group root
+    disabled
+    oneshot
+
+service preinstall /sbin/busybox sh /system/bin/preinstall.sh
+    user root
+    group root
+    disabled
+    oneshot

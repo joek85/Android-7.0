@@ -1,0 +1,5 @@
+allow untrusted_app domain:file r_file_perms;
+allow untrusted_app domain:dir r_dir_perms;
+allow untrusted_app att_policy:process sigchld;
+# dont audit "avc:denied {ioctl} for pid = comm="ay.happyplay.aw path="socket:[]" dev="sockfs" ion= ioctlcmd=8927 ..." when allcast.apk connect to Internet.
+dontaudit untrusted_app self:udp_socket ioctl;

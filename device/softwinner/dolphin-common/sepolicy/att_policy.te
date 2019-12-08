@@ -1,0 +1,15 @@
+type att_policy, domain, mlstrustedsubject;
+type att_policy_exec, exec_type, file_type;
+typeattribute att_policy mlstrustedsubject;
+init_daemon_domain(att_policy);
+allow att_policy benchmark_prop:property_service set;
+allow att_policy domain:dir r_dir_perms;
+allow att_policy domain:file r_file_perms;
+allow att_policy att_policy:capability dac_override;
+allow att_policy app_data_file:dir r_dir_perms;
+allow att_policy property_socket:sock_file write;
+allow att_policy init:unix_stream_socket connectto;
+allow att_policy system_data_file:dir r_dir_perms;
+allow att_policy system_data_file:file r_file_perms;
+allow att_policy untrusted_app:process ptrace;
+allow att_policy self:capability { sys_ptrace sys_resource };

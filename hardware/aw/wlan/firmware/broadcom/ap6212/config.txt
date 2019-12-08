@@ -1,0 +1,2 @@
+#FOR MMC RTO ERROR
+kso_enable=0

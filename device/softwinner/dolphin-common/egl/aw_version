@@ -1,0 +1,7 @@
+r7p0-00rel0 um 015
+
+Build parameters:
+CONFIG=release
+VARIANT=mali400-r1p1-gles-linux-android-nougat_mr1-prerotate-no_profiling-dma_buf-rgb_is_xrgb-no_Werror
+TARGET_PLATFORM=default_7a
+TARGET_TOOLCHAIN=arm-linux-gcc-vfp

@@ -1,0 +1,34 @@
+key 72   BACK               WAKE_DROPPED
+key 20   MENU               WAKE_DROPPED
+key 21   DPAD_CENTER        WAKE_DROPPED
+key 23   DPAD_DOWN          WAKE_DROPPED
+key 22   DPAD_UP            WAKE_DROPPED
+key 148  HOME               WAKE
+key 25   DPAD_LEFT          WAKE_DROPPED
+key 24   DPAD_RIGHT         WAKE_DROPPED
+key 68   VOLUME_UP          WAKE
+key 67   VOLUME_DOWN        WAKE
+key 13   POWER              WAKE
+key 0    0                  WAKE
+key 1    1                  WAKE
+key 2    2                  WAKE
+key 3    3                  WAKE
+key 4    4                  WAKE
+key 5    5                  WAKE
+key 6    6                  WAKE
+key 7    7                  WAKE
+key 8    8                  WAKE
+key 9    9                  WAKE
+key 78   MEDIA_PLAY_PAUSE   WAKE
+key 90   MEDIA_STOP         WAKE
+key 14   MUTE               WAKE
+key 27   TV_SYSTEM          WAKE
+key 152  SETTINGS           WAKE
+key 98   PROG_RED           WAKE
+key 101  PROG_BLUE          WAKE
+key 99   PROG_GREEN         WAKE
+key 100  PROG_YELLOW        WAKE
+key 15   MENU               WAKE_DROPPED
+key 77   HISENSE_FAC_NEC_DMP
+
+

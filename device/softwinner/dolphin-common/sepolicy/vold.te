@@ -1,0 +1,8 @@
+#============= vold ==============
+allow vold device:dir { add_name create remove_name };
+allow vold block_device:blk_file getattr;
+allow vold mnt_media_rw_stub_file:dir { read open };
+allow vold self:capability { setuid setgid };
+allow vold kernel:system module_request;
+allow vold log_device:dir write;
+allow vold softwinner_service:service_manager add;

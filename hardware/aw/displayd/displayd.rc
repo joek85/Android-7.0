@@ -1,0 +1,4 @@
+service displayd /system/bin/displayd
+	socket displayd stream 0666 system system
+	class main
+

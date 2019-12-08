@@ -1,0 +1,3 @@
+#============= lmkd ==============
+allow lmkd zygote:dir search;
+allow lmkd zygote:file { write open };

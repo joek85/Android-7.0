@@ -1,0 +1,6 @@
+service att_policy /system/bin/att_policy
+        class main
+        user root
+        group root
+        seclabel u:r:att_policy:s0
+        oneshot

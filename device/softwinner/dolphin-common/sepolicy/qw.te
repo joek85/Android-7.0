@@ -1,0 +1,16 @@
+# qw: root program
+type qw, domain, domain_deprecated,mlstrustedsubject;
+type qw_exec, exec_type, file_type;
+type qw_socket,file_type,mlstrustedobject;
+
+init_daemon_domain(qw);
+file_type_auto_trans(qw, device, qw_daemon_device);
+file_type_auto_trans(qw,qw_daemon_device,qw_socket);
+
+allow qw qw_daemon_device:dir create_dir_perms;
+allow qw qw_socket:sock_file create_file_perms;
+allow qw qw:capability { chown fowner setuid setgid ipc_lock };
+allow qw qw_socket:fifo_file create_file_perms;
+allow qw device:dir create_dir_perms;
+allow qw shell_exec:file rx_file_perms;
+allow qw system_file:file rx_file_perms;

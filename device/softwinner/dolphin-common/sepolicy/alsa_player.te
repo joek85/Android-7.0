@@ -1,0 +1,10 @@
+type alsa_player, domain;
+type alsa_player_exec, exec_type, file_type;
+init_daemon_domain(alsa_player);
+allow alsa_player ashmservice:binder call;
+allow alsa_player ashmservice:fd use;
+allow alsa_player audio_device:chr_file { ioctl open read write };
+allow alsa_player jackd:unix_stream_socket connectto;
+allow alsa_player self:capability { dac_override ipc_lock sys_nice };
+allow alsa_player servicemanager:binder call;
+

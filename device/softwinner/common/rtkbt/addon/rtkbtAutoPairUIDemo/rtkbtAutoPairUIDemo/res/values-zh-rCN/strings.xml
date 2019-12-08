@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<resources>
+    <string name="app_name">"BluetoothRTKAutoPairService"</string>
+    <string name="found">"找到遥控器设备，开始自动配对，请勿操作遥控器"</string>
+    <string name="removebond_timeout">"删除之前配对信息操作超时，失败！"</string>
+    <string name="ble_pair_success">"LE模式遥控器配对成功"</string>
+    <string name="ble_pair_fail">"LE模式遥控器配对失败"</string>
+    <string name="ble_pair_timeout">"LE模式遥控器配对超时，失败！"</string>
+    <string name="ble_sdp_success">"LE模式遥控器搜索服务(SDP)成功"</string>
+    <string name="ble_sdp_fail">"LE模式遥控器搜索服务（SDP）失败"</string>
+    <string name="classic_pair_success">"BR/EDR模式遥控器配对成功"</string>
+    <string name="classic_pair_fail">"BR/EDR模式遥控器配对失败"</string>
+    <string name="classic_pair_timeout">"BR/EDR模式遥控器配对超时，失败！"</string>
+    <string name="classic_sdp_success">"BR/EDR模式遥控器搜索服务（SDP）成功"</string>
+    <string name="classic_sdp_fail">"BR/EDR模式遥控器搜索服务（SDP）失败"</string>
+    <string name="over">"遥控器可以开始使用了！"</string>
+    <string name="connect_to_device">"遥控器配对已完成，正在连接遥控器，请勿操作遥控器"</string>
+    <string name="error_weak_signal">"请将遥控器靠近电视，等待自动配对！"</string>
+    <string name="remove_bond">解除遥控器配对</string>
+    <string name="auto_pair_stop">自动配对超时结束！</string>
+</resources>

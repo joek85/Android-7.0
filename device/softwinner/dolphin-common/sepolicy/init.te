@@ -1,0 +1,33 @@
+allow init block_device:blk_file {setattr read write};
+allow init vfat:dir { search mounton write add_name };
+allow init vfat:file { create read write open getattr };
+allow init sdcardd_exec:file getattr;
+allow init rootfs:chr_file write;
+allow init tmpfs:lnk_file create;
+allow init self:packet_socket {create setopt ioctl bind write read};
+allow init app_data_file:dir {open read search mounton};
+allow init self:capability sys_module;
+allow init ram_device:blk_file write;
+allow init { socket_device displayd_socket_device }:sock_file { create setattr unlink};
+allow init disp_device:chr_file { read write ioctl open };
+allow init sysfs:file {w_file_perms read getattr open};
+allow init null_device:chr_file rw_file_perms;
+#allow init write display resolution into nanda
+allow init boot_block_device:blk_file write;
+allow init proc_drop_caches:file rw_file_perms;
+allow init self:capability sys_nice;
+allow init domain:process setsched;
+allow init storage_file:lnk_file r_file_perms;
+allow init debugfs:file w_file_perms;
+allow init exec_type:file r_file_perms;
+allow init sunxi_soc_info_device:chr_file {read write ioctl open};
+allow init userdata_block_device:blk_file rw_file_perms;
+allow init rootfs:file r_file_perms;
+allow init system_file:system module_load;
+allow init rootfs:system module_load;
+#usb config
+allow init configfs:file create_file_perms;
+allow init configfs:lnk_file create_file_perms;
+allow init sysfs:dir create_dir_perms;
+allow init kernel:system module_request;
+

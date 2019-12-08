@@ -1,0 +1,332 @@
+import init.sun8iw7p1.usb.rc
+import init.common.rc
+
+
+on early-init
+    mount debugfs debugfs /sys/kernel/debug mode=0755
+    # Set init and its forked children's oom_adj.
+    #write /proc/1/oom_adj -16
+
+on init
+    # See storage config details at http://source.android.com/tech/storage/
+    # Support legacy paths
+    symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard0
+    
+    insmod nand.ko
+    
+    #blueray iso mount path
+    mkdir /mnt/bluray 0777 root root
+
+on post-fs-data
+    mkdir /data/media 0770 media_rw media_rw
+
+    # marlin
+    mkdir /data/local/sushi 0700 media media
+
+    # Set indication (checked by vold) that we have finished this action
+    setprop vold.post_fs_data_done 1
+    # to force to start sdcard
+    class_start late_start
+
+# sw-keystore
+    mkdir /cache/HWML 0770 root system
+    #insmod /system/vendor/modules/sunxi_schw.ko
+    chmod 0660 /dev/scdev
+    chown keystore keystore /dev/scdev
+
+
+on boot
+    chown audio audio /dev/snd/pcmC0D0p
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+
+    chown system system /sys/kernel/autohotplug/enable
+    chmod 0660 /sys/kernel/autohotplug/enable
+
+    chown system system /sys/devices/system/cpu/cpu0/cpufreq/boot_lock
+    chmod 0660 /sys/devices/system/cpu/cpu0/cpufreq/boot_lock
+
+    #for enhance of disp3
+    chown system root /sys/class/disp/disp/attr/disp
+    chown system root /sys/class/disp/disp/attr/enhance_mode
+    chown system root /sys/class/disp/disp/attr/enhance_bright
+    chown system root /sys/class/disp/disp/attr/enhance_contrast
+    chown system root /sys/class/disp/disp/attr/enhance_denoise
+    chown system root /sys/class/disp/disp/attr/enhance_detail
+    chown system root /sys/class/disp/disp/attr/enhance_edge
+    chown system root /sys/class/disp/disp/attr/enhance_saturation
+
+    #for disp driver runtime pm
+    write /sys/class/disp/disp/attr/runtime_enable 1
+
+    #for hdmi cts apk
+    chmod 0777 /sys/class/hdmi/hdmi/attr/hpd_mask
+    mkdir /data/misc/jack 0700 system system
+#insmod CE
+    #insmod /system/vendor/modules/ss.ko
+	#insmod /system/vendor/modules/af_alg.ko
+	#insmod /system/vendor/modules/algif_hash.ko
+	#insmod /system/vendor/modules/algif_rng.ko
+	#insmod /system/vendor/modules/algif_skcipher.ko
+# usb camera
+       #insmod /system/vendor/modules/videobuf2-core.ko
+       #insmod /system/vendor/modules/videobuf2-v4l2.ko
+       #insmod /system/vendor/modules/videobuf2-memops.ko
+       #insmod /system/vendor/modules/videobuf2-vmalloc.ko
+       #insmod /system/vendor/modules/uvcvideo.ko
+
+    chown root system /sys/module/lowmemorykiller/parameters/adj
+    chmod 0664 /sys/module/lowmemorykiller/parameters/adj
+    chown root system /sys/module/lowmemorykiller/parameters/minfree
+    chmod 0664 /sys/module/lowmemorykiller/parameters/fast_kill
+    chown root system /sys/module/lowmemorykiller/parameters/fast_kill
+    chmod 0664 /sys/module/lowmemorykiller/parameters/minfree
+    write /sys/module/lowmemorykiller/parameters/minfree 3072,4096,6144,10240,12288,14336
+
+# bluetooth
+    # UART device
+    chmod 0660 /dev/ttyS1
+    chown bluetooth net_bt_stack /dev/ttyS1
+
+    # power up/down interface
+    chmod 0660 /sys/class/rfkill/rfkill0/state
+    chmod 0660 /sys/class/rfkill/rfkill0/type
+    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
+    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
+
+    # bluetooth MAC address programming
+    chown bluetooth net_bt_stack ro.bt.bdaddr_path
+    chown bluetooth net_bt_stack /system/etc/bluetooth
+    chown bluetooth net_bt_stack /data/misc/bluetooth
+    setprop ro.bt.bdaddr_path "/data/misc/bluetooth/bdaddr"
+
+    #insmod /system/vendor/modules/btbcm.ko
+    # bluetooth LPM
+    chmod 0220 /proc/bluetooth/sleep/lpm
+    chmod 0220 /proc/bluetooth/sleep/btwrite
+    chown bluetooth net_bt_stack /proc/bluetooth/sleep/lpm
+    chown bluetooth net_bt_stack /proc/bluetooth/sleep/btwrite
+	chmod 0666 /dev/cedar_dev
+	chmod 0666 /dev/deinterlace
+
+# to observe dnsmasq.leases file for dhcp information of soft ap.
+    chown dhcp system /data/misc/dhcp
+
+# update Sun8iw7p1 Soc 4-Cpus Smp platform cpuset when processors up
+    write /dev/cpuset/foreground/cpus 0-3
+    write /dev/cpuset/foreground/boost/cpus 0-3
+    write /dev/cpuset/background/cpus 0-3
+    write /dev/cpuset/system-background/cpus 0-3
+    write /dev/cpuset/top-app/cpus 0-3
+
+on property:sys.shutdown.hdmi=1
+    write /sys/class/hdmi/hdmi/attr/hpd_mask 0x10
+
+on property:sys.wifi.scan.device=1
+    write /sys/devices/virtual/misc/sunxi-wlan/rf-ctrl/scan_device 1
+
+on property:sys.wifi.scan.device=0
+    write /sys/devices/virtual/misc/sunxi-wlan/rf-ctrl/scan_device 0
+
+on property:sys.wifi.power.on=1
+    write /sys/devices/virtual/misc/sunxi-wlan/rf-ctrl/power_state 1
+
+on property:sys.wifi.power.on=0
+    write /sys/devices/virtual/misc/sunxi-wlan/rf-ctrl/power_state 0
+
+on property:persist.service.bdroid.sleep=rtl
+    insmod /system/vendor/modules/rtl_btlpm.ko
+    chmod 0220 /proc/bluetooth/sleep/lpm
+    chmod 0220 /proc/bluetooth/sleep/btwrite
+    chown bluetooth net_bt_stack /proc/bluetooth/sleep/lpm
+    chown bluetooth net_bt_stack /proc/bluetooth/sleep/btwrite
+
+on property:persist.service.bdroid.sleep=bcm
+#    chmod 0220 /proc/bluetooth/sleep/lpm
+#    chmod 0220 /proc/bluetooth/sleep/btwrite
+#    chmod 0660 /proc/bluetooth/sleep/suspend
+#    chown bluetooth net_bt_stack /proc/bluetooth/sleep/lpm
+#    chown bluetooth net_bt_stack /proc/bluetooth/sleep/btwrite
+#    chown bluetooth net_bt_stack /proc/bluetooth/sleep/suspend
+
+on property:persist.service.bdroid.uart=1
+    chmod 0660 /dev/ttyS1
+    chown bluetooth net_bt_stack /dev/ttyS1
+
+on property:persist.service.bdroid.usb=1
+    insmod /system/vendor/modules/rtk_btusb.ko
+    chmod 0660 /dev/rtk_btusb
+    chown bluetooth net_bt_stack /dev/rtk_btusb
+
+on property:persist.sys.disp_rsl_fex=*
+    ubootparam disp_rsl ${persist.sys.disp_rsl_fex}
+
+on property:persist.sys.tv_vdid_fex=*
+    ubootparam tv_vdid ${persist.sys.tv_vdid_fex}
+
+on property:persist.sys.disp_config=*
+    ubootparam disp_config ${persist.sys.disp_config}
+
+on property:hdmi_cts.hpdreport=*
+    write /sys/class/hdmi/hdmi/attr/hpd_mask ${hdmi_cts.hpdreport}
+
+on fs
+
+    mkdir /Reserve0 0777 system system
+    insmod fivm.ko
+    mount_all /fstab.sun8iw7p1
+
+    #swapon_all /fstab.sun8iw7p1
+
+# minfree
+#3072,4096,6144,10240,12288,14336
+
+    insmod /system/vendor/modules/mali.ko
+    insmod /system/vendor/modules/snd-hwdep.ko
+    insmod /system/vendor/modules/snd-rawmidi.ko
+    insmod /system/vendor/modules/snd-usbmidi-lib.ko
+    insmod /system/vendor/modules/snd-usb-audio.ko
+    insmod /system/vendor/modules/snd-aloop.ko
+
+    #insmod /system/vendor/modules/sunxi-keyboard.ko
+
+
+
+    #insmod /system/vendor/modules/sunxi-ir-rx.ko
+    insmod /system/vendor/modules/i2c-dev.ko
+    #insmod /system/vendor/modules/gpio-sunxi.ko
+
+
+    #insmod /system/vendor/modules/bcmdhd.ko
+    #insmod /system/vendor/modules/usbnet.ko
+    #insmod /system/vendor/modules/asix.ko
+    #insmod /system/vendor/modules/qf9700.ko
+    #insmod /system/vendor/modules/mcs7830.ko
+    #insmod /system/vendor/modules/rtl8150.ko
+    #insmod /system/vendor/modules/cdc_ether.ko
+    #insmod /system/vendor/modules/sunxi-snddaudio1.ko
+
+
+# virtual sdcard daemon running as media_rw (1023)
+#service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
+#    class late_start
+
+#service fuse_extsd /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/extsd /storage/extsd
+#    class late_start
+#    disabled
+
+#service fuse_usbhost /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbhost /storage/usbhost
+#    class late_start
+#    disabled
+
+# wifi service
+# 1 wifi sta service
+service wpa_supplicant /system/bin/wpa_supplicant \
+    p2p_supported=false
+    class main
+    socket wpa_wlan0 dgram 660 wifi wifi
+    disabled
+    oneshot
+
+#2 wifi sta p2p concurrent service
+service p2p_supplicant /system/bin/wpa_supplicant \
+    p2p_supported=true
+    class main
+    socket wpa_wlan0 dgram 660 wifi wifi
+    disabled
+    oneshot
+
+service dhcpcd_wlan0 /system/bin/dhcpcd -aABDKL
+    class late_start
+    disabled
+    oneshot
+
+service dhcpcd_p2p /system/bin/dhcpcd -aABKL
+    class late_start
+    disabled
+    oneshot
+
+service iprenew_wlan0 /system/bin/dhcpcd -n
+    class late_start
+    disabled
+    oneshot
+
+service iprenew_p2p /system/bin/dhcpcd -n
+    class late_start
+    disabled
+    oneshot
+
+service dhcpcd_bnep0 /system/bin/dhcpcd -BKLG
+    disabled
+    oneshot
+
+service dhcpcd_bnep1 /system/bin/dhcpcd -BKLG
+    disabled
+    oneshot
+
+service dhcpcd_bnep2 /system/bin/dhcpcd -BKLG
+    disabled
+    oneshot
+
+service dhcpcd_bnep3 /system/bin/dhcpcd -BKLG
+    disabled
+    oneshot
+
+service dhcpcd_bnep4 /system/bin/dhcpcd -BKLG
+    disabled
+    oneshot
+
+service dhcpcd_bt-pan /system/bin/dhcpcd -BKLG
+    disabled
+    oneshot
+
+service iprenew_bt-pan /system/bin/dhcpcd -n
+    disabled
+    oneshot
+
+service dhcpcd_eth0 /system/bin/dhcpcd -aABDKL
+    class main
+    disabled
+    oneshot
+
+service iprenew_eth0 /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+service start_pppoe /system/bin/pppoe-connect
+    class main
+    disabled
+    oneshot
+
+service stop_pppoe /system/bin/pppoe-disconnect
+    class main
+    disabled
+    oneshot
+
+#Jack
+#service ashmservice /system/bin/ashmservice
+#    class main
+
+#service jackd /system/bin/jackd -v -R -P99 -dalsa -Chw:Device -Phw:Device -r48000 -p300
+#    class main
+    #disabled
+
+#service helloworldserver /system/bin/helloworldserver
+#    class main
+#    disabled
+
+#service alsa_player /system/xbin/alsa_in -jalsaplayer -dlooprec -q1 -p512
+#    class main
+#    disabled
+
+on property:sys.boot_completed=1
+#    start preinstall
+#    start alsa_player
+#    start alsa_mic
+#    start alsahph
+#    start helloworldserver
+#    start securefile
+#    start systemmixservice
+#    start isomountmanager

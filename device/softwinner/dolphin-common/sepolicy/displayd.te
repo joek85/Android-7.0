@@ -1,0 +1,24 @@
+type displayd, domain;
+type displayd_exec, exec_type, file_type;
+init_daemon_domain(displayd);
+allow displayd self:netlink_kobject_uevent_socket read;
+allow displayd self:netlink_route_socket read;
+allow displayd tmpfs:file w_file_perms;
+allow displayd proc:file w_file_perms;
+allow displayd property_socket:sock_file write;
+allow displayd self:netlink_nflog_socket read;
+allow displayd init:unix_stream_socket connectto;
+allow displayd self:netlink_kobject_uevent_socket create;
+allow displayd self:capability { net_admin dac_override };
+allow displayd self:netlink_kobject_uevent_socket { bind setopt getopt };
+allow displayd self:netlink_route_socket { bind create setopt getopt};
+allow displayd self:netlink_nflog_socket { bind create setopt getopt };
+allow displayd system_file:file execute_no_trans;
+allow displayd sysfs:file {w_file_perms read getattr open};
+allow displayd shell_exec:file { execute execute_no_trans };
+allow displayd shell_exec:file r_file_perms;
+allow displayd proc_net:file { create read getattr open};
+allow displayd { socket_device displayd_socket_device }:sock_file { create setattr write read};
+allow displayd surfaceflinger:unix_stream_socket { connectto write read};
+allow displayd disp_device:chr_file { read write ioctl open };
+

@@ -1,0 +1,2 @@
+#============= healthd ==============
+allow healthd zygote:binder call;

@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">BluetoothRTKAutoPairService</string>
+    <string name="found">Found Remote Controller,Start BLE Pair Process. Please Do not operate remoter!</string>
+
+    <string name="removebond_timeout">Remove Old Pair Data Timeout</string>
+
+    <string name="ble_pair_success">BLE Pair Success</string>
+    <string name="ble_pair_fail">BLE Pair Fail</string>
+    <string name="ble_pair_timeout">BLE Pair Timeout</string>
+    <string name="ble_sdp_success">BLE SDP Success</string>
+    <string name="ble_sdp_fail">BLE SDP Fail</string>
+
+    <string name="classic_pair_success">Classic Pair Success</string>
+    <string name="classic_pair_fail">Classic Pair Fail</string>
+    <string name="classic_pair_timeout">Classic Pair Timeout</string>
+    <string name="classic_sdp_success">Classic SDP Success</string>
+    <string name="classic_sdp_fail">Classic SDP Fail</string>
+
+    <string name="connect_to_device">Remote Controller is paired, please wait to connect!</string>
+    <string name="over">Remote Controller can be used</string>
+    <string name="error_weak_signal">Please keep Remote Controller close to the TV, wait for autopair!</string>
+    <string name="remove_bond">remove the bond of the remoter</string>
+    <string name="auto_pair_stop">Auto pair stop!</string>
+</resources>

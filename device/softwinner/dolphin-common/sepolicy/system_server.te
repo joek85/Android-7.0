@@ -1,0 +1,8 @@
+#============= system_server ==============
+allow system_server self:capability sys_module;
+allow system_server displayd:unix_stream_socket {connectto read write};
+allow system_server { socket_device displayd_socket_device }:sock_file write;
+allow system_server softwinner_service:service_manager find;
+allow system_server audio_prop:property_service set;
+#wifi
+allow system_server system_file:system module_load;

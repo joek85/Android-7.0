@@ -1,0 +1,8 @@
+#============= audioserver ==============
+allow audioserver property_socket:sock_file rw_file_perms;
+allow audioserver sysfs:file rw_file_perms;
+allow audioserver init:unix_stream_socket {connectto read write};
+allow audioserver bootanim:binder call;
+allow audioserver audio_prop:property_service set;
+allow audioserver audioserver:netlink_socket create_stream_socket_perms;
+allow audioserver system_data_file:file r_file_perms;

@@ -1,0 +1,3 @@
+type media_prop, property_type, core_property_type;
+type benchmark_prop, property_type, core_property_type;
+type hdmi_prop, property_type, core_property_type;
