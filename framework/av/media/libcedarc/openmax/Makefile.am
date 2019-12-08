@@ -1,3 +1,0 @@
-
-SUBDIRS = omxcore venc vdec
-
